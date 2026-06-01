@@ -204,12 +204,15 @@ while True:
             if(index == -1 ):
                 print("Mã này chưa có trong danh sách !")
             else:
-                result = saving_accounts[index]["balance"] * (saving_accounts[index]["term_months"] / 12) *(saving_accounts[index]["interest_rate"] /100) if(saving_accounts[index]["status"] == "active") else (saving_accounts[index]["balance"] * 0)
-                print(
-                    f"Tiền lãi của bạn: {result:,}đ\n"
-                    f"Tổng tiền nhận khi đến hạn: {(saving_accounts[index]["balance"] + result):,}đ"
-                    )
-                print()
+                if(saving_accounts[index]["status"] == "active"):
+                    result = saving_accounts[index]["balance"] * (saving_accounts[index]["term_months"] / 12) *(saving_accounts[index]["interest_rate"] /100)
+                    print(
+                        f"Tiền lãi của bạn: {result:,}đ\n"
+                        f"Tổng tiền nhận khi đến hạn: {(saving_accounts[index]["balance"] + result):,}đ"
+                        )
+                    print()
+                else:
+                    print("Tài khoản đã tất toán")
         case 6:
             print()
             while True:
@@ -233,7 +236,7 @@ while True:
                         continue 
                     break 
                 if(saving_accounts[index]["status"] != "active"): 
-                    print("Mã tài khoản đã bị khóa ! close !")
+                    print("Tài khoản đã tất toán")
                 else:
                     if(month_send < saving_accounts[index]["term_months"]):
                         result = saving_accounts[index]["balance"] * (month_send / 12) *(0.5/100)
